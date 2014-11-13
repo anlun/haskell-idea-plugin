@@ -5,54 +5,54 @@
   tokenTypeClass  ="org.jetbrains.haskell.parser.HaskellElementType"
 
   tokens=[
-    underscoreId = '_'             // Haskell keywords
-    asId = 'as'
-    caseId = 'case'
-    classId = 'class'
-    dataId = 'data'
-    defaultId = 'default'
-    derivingId = 'deriving'
-    doId = 'do'
-    elseId = 'else'
-    hidingId = 'hiding'
-    ifId = 'if'
-    importId = 'import'
-    inId = 'in'
-    infixId = 'infix'
-    infixlId = 'infixl'
-    infixrId = 'infixr'
-    instanceId = 'instance'
-    letId = 'let'
-    moduleId = 'module'
-    newtypeId = 'newtype'
-    ofId = 'of'
-    qualifiedId = 'qualified'
-    thenId = 'then'
-    typeId = 'type'
-    whereId = 'where'
+    underscore = '_'             // Haskell keywords
+    as = 'as'
+    case = 'case'
+    class = 'class'
+    data = 'data'
+    default = 'default'
+    deriving = 'deriving'
+    do = 'do'
+    else = 'else'
+    hiding = 'hiding'
+    if = 'if'
+    import = 'import'
+    in = 'in'
+    infix = 'infix'
+    infixl = 'infixl'
+    infixr = 'infixr'
+    instance = 'instance'
+    let = 'let'
+    module_t = 'module'
+    newtype = 'newtype'
+    of = 'of'
+    qualified = 'qualified'
+    then = 'then'
+    type = 'type'
+    where = 'where'
 
-    forallId = 'forall'    // GHC extension keywords
-    foreignId = 'foreign'
-    exportId = 'export'
-    labelId = 'label'
-    dynamicId ='dynamic'
-    safeId = 'safe'
-    interruptibleId = 'interruptible'
-    unsafeId = 'unsafe'
-    mdoId = 'mdo'
-    familyId = 'family'
-    roleId = 'role'
-    stdcallId = 'stdcall'
-    ccallId = 'ccall'
-    capiId = 'capi'
-    primId = 'prim'
-    javascriptId = 'javascript'
-    procId = 'proc'                   // for arrow notation extension
-    recId = 'rec'                    // for arrow notation extension
-    groupId = 'group'                  // for list transform extension
-    byId = 'by'                     // for list transform extension
-    usingId ='using'                  // for list transform extension
-    patternId ='pattern'                // for pattern synonyms
+    forall = 'forall'    // GHC extension keywords
+    foreign = 'foreign'
+    export = 'export'
+    label = 'label'
+    dynamic ='dynamic'
+    safe = 'safe'
+    interruptible = 'interruptible'
+    unsafe = 'unsafe'
+    mdo = 'mdo'
+    family = 'family'
+    role = 'role'
+    stdcall = 'stdcall'
+    ccall = 'ccall'
+    capi = 'capi'
+    prim = 'prim'
+    javascript = 'javascript'
+    proc = 'proc'                   // for arrow notation extension
+    rec = 'rec'                    // for arrow notation extension
+    group = 'group'                  // for list transform extension
+    by = 'by'                     // for list transform extension
+    using ='using'                  // for list transform extension
+    pattern ='pattern'                // for pattern synonyms
     BLOCK_COMMENT = 'BLOCK_COMMENT'
     NEW_LINE = '\n'
 /*
@@ -80,11 +80,13 @@
  '{-# INCOHERENT'         { L _ ITincoherent_prag }
  '#-}'                                          { L _ ITclose_prag }
 
- '..'           { L _ ITdotdot }                        -- reserved symbols
- ':'            { L _ ITcolon }
- '::'           { L _ ITdcolon }
- '='            { L _ ITequal }
- '\\'           { L _ ITlam }
+*/
+ dotdot = '..'                      // reserved symbols
+ colon = ':'
+ dcolon = '::'
+ equal =  '='
+ lam = '\\'
+/*
  'lcase'        { L _ ITlcase }
  '|'            { L _ ITvbar }
  '<-'           { L _ ITlarrow }
@@ -102,8 +104,8 @@
  '>>-'          { L _ ITRarrowtail }            -- for arrow notation
  */
  dot = '.'
- ocurlyId = '{'
- ccurlyId = '}'
+ ocurly = '{'
+ ccurly = '}'
  vocurly = 'vocurly'
  vccurly = 'vccurly'
  vsemicolon = 'vsemicolon'
@@ -136,9 +138,10 @@
  PREFIXQCONSYM  { L _ (ITprefixqconsym  _) }
 
  IPDUPVARID     { L _ (ITdupipvarid   _) }              -- GHC extension
-
- CHAR           { L _ (ITchar     _) }
- STRING         { L _ (ITstring   _) }
+*/
+ CHAR = 'char'
+ STRING = 'string'
+/*
  INTEGER        { L _ (ITinteger  _) }
  RATIONAL       { L _ (ITrational _) }
 

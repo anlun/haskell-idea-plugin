@@ -13,4 +13,10 @@ public interface Module extends PsiElement {
   @NotNull
   Modid getModid();
 
+  @NotNull
+  PsiElement getModuleT();
+
+  @NotNull
+  PsiElement getWhere();
+
 }

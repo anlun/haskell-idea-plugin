@@ -125,12 +125,12 @@ public class GeneratedParser implements PsiParser {
   // 'module' modid 'where' body
   public static boolean module(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "module")) return false;
-    if (!nextTokenIs(builder_, MODULEID)) return false;
+    if (!nextTokenIs(builder_, MODULE_T)) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = consumeToken(builder_, MODULEID);
+    result_ = consumeToken(builder_, MODULE_T);
     result_ = result_ && modid(builder_, level_ + 1);
-    result_ = result_ && consumeToken(builder_, WHEREID);
+    result_ = result_ && consumeToken(builder_, WHERE);
     result_ = result_ && body(builder_, level_ + 1);
     exit_section_(builder_, marker_, MODULE, result_);
     return result_;

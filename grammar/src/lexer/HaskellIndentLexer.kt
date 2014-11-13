@@ -21,7 +21,7 @@ import lexer.KitHaskellLexer
 
 
 public class HaskellIndentLexer() : LexerBase() {
-    val indentTokens = HashSet<IElementType>(Arrays.asList(GeneratedTypes.WHEREID))
+    val indentTokens = HashSet<IElementType>(Arrays.asList(GeneratedTypes.WHERE))
 
     var buffer: CharSequence? = null
     val tokens: MutableList<IElementType> = ArrayList();
@@ -35,13 +35,77 @@ public class HaskellIndentLexer() : LexerBase() {
         this.buffer = buffer;
         val lexer = KitHaskellLexer()
         lexer.start(buffer, startOffset, endOffset, initialState);
+
+        var indentStack : IntStack? = null
+        var lineStart = 0;
+        var firstOnLine = false;
+        var writeIndent = false;
+
         while (lexer.getTokenType() != null) {
-            tokens.add(lexer.getTokenType())
-            starts.add(lexer.getTokenStart())
+            val tokenType = lexer.getTokenType()
+            val tokenStart = lexer.getTokenStart()
+
+
+            if (tokenType != GeneratedTypes.NEW_LINE &&
+                tokenType != GeneratedTypes.BLOCK_COMMENT) {
+                if (writeIndent) {
+                    val indent = tokenStart - lineStart
+                    indentStack = IntStack(indent, indentStack)
+                    writeIndent = false;
+                    firstOnLine = false;
+
+                    tokens.add(GeneratedTypes.VOCURLY)
+                    starts.add(tokenStart)
+                    ends.add(tokenStart)
+                    text.add("")
+                } else if (firstOnLine) {
+                    val indent = tokenStart - lineStart
+                    firstOnLine = false;
+
+                    if (indentStack != null) {
+                        if (indentStack!!.head == indent) {
+                            tokens.add(GeneratedTypes.VSEMICOLON)
+                            starts.add(tokenStart)
+                            ends.add(tokenStart)
+                            text.add("")
+                        }
+                        if (indentStack!!.head > indent) {
+                            tokens.add(GeneratedTypes.VCCURLY)
+                            starts.add(tokenStart)
+                            ends.add(tokenStart)
+                            text.add("")
+                            indentStack = indentStack!!.tail
+                        }
+                    }
+                }
+            } else {
+                if (tokenType == GeneratedTypes.NEW_LINE) {
+                    lineStart = lexer.getTokenEnd()
+                    firstOnLine = true;
+                }
+            }
+
+
+            tokens.add(tokenType)
+            starts.add(tokenStart)
             ends.add(lexer.getTokenEnd())
             text.add(lexer.getTokenText())
             lexer.advance()
+
+            if (indentTokens.contains(tokenType)) {
+                if (lexer.getTokenType() != GeneratedTypes.OCURLY) {
+                    writeIndent = true;
+                }
+            }
         }
+        while (indentStack != null) {
+            tokens.add(GeneratedTypes.VCCURLY)
+            starts.add(lexer.getBufferEnd())
+            ends.add(lexer.getBufferEnd())
+            text.add("")
+            indentStack = indentStack!!.tail
+        }
+        println(tokens)
     }
 
     override fun getState(): Int {
@@ -71,5 +135,8 @@ public class HaskellIndentLexer() : LexerBase() {
     override fun getBufferEnd(): Int {
         throw UnsupportedOperationException()
     }
+
+    class IntStack(val head: Int,
+                   val tail: IntStack?)
 }
 

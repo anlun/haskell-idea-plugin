@@ -34,4 +34,16 @@ public class ModuleImpl extends ASTWrapperPsiElement implements Module {
     return findNotNullChildByClass(Modid.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getModuleT() {
+    return findNotNullChildByType(MODULE_T);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getWhere() {
+    return findNotNullChildByType(WHERE);
+  }
+
 }

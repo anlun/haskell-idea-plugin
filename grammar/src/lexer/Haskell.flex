@@ -122,8 +122,8 @@ EOL_COMMENT = "--"[^\n]*
 {white_no_nl}+        { return TokenType.WHITE_SPACE; }
 "\n"                  { return GeneratedTypes.NEW_LINE; }
 //{EOL_COMMENT}         { return TokenPackage.getEND_OF_LINE_COMMENT(); }
-"{"                   { return GeneratedTypes.OCURLYID; }
-"}"                   { return GeneratedTypes.CCURLYID; }
+"{"                   { return GeneratedTypes.OCURLY; }
+"}"                   { return GeneratedTypes.CCURLY; }
 
 //"["                   { return TokenPackage.getLEFT_BRACKET(); }
 //"]"                   { return TokenPackage.getRIGHT_BRACKET(); }
@@ -136,7 +136,7 @@ EOL_COMMENT = "--"[^\n]*
 //".."                  { return TokenPackage.getDOT_DOT(); }
 //"$"                   { return TokenPackage.getDOLLAR(); }
 //","                   { return TokenPackage.getCOMMA(); }
-//"="                   { return TokenPackage.getEQUALS(); }
+"="                   { return GeneratedTypes.EQUAL; }
 //"|"                   { return TokenPackage.getVERTICAL_BAR();}
 //"\\"                  { return TokenPackage.getBACK_SLASH(); }
 //"<-"                  { return TokenPackage.getLEFT_ARROW(); }
@@ -166,7 +166,7 @@ EOL_COMMENT = "--"[^\n]*
 //"export"              { return TokenPackage.getEXPORT(); }
 //"hiding"              { return TokenPackage.getHIDING_KW(); }
 //"if"                  { return TokenPackage.getIF_KW(); }
-"import"              { return GeneratedTypes.IMPORTID; }
+"import"              { return GeneratedTypes.IMPORT; }
 //"in"                  { return TokenPackage.getIN_KW(); }
 //"infix"               { return TokenPackage.getINFIX_KW(); }
 //"infixl"              { return TokenPackage.getINFIXL_KW(); }
@@ -175,7 +175,7 @@ EOL_COMMENT = "--"[^\n]*
 //("forall")|(\u2200)   { return TokenPackage.getFORALL_KW(); }
 //"foreign"             { return TokenPackage.getFOREIGN_KW(); }
 //"let"                 { return TokenPackage.getLET_KW(); }
-"module"              { return GeneratedTypes.MODULEID; }
+"module"              { return GeneratedTypes.MODULE_T; }
 //"newtype"             { return TokenPackage.getNEWTYPE_KW(); }
 //"of"                  { return TokenPackage.getOF_KW(); }
 //"then"                { return TokenPackage.getTHEN_KW(); }
@@ -183,14 +183,14 @@ EOL_COMMENT = "--"[^\n]*
 //"safe"                { return TokenPackage.getSAFE(); }
 //"type"                { return TokenPackage.getTYPE_KW(); }
 //"unsafe"              { return TokenPackage.getUNSAFE(); }
-"where"               { return GeneratedTypes.WHEREID; }
+"where"               { return GeneratedTypes.WHERE; }
 //"{-#".*"#-}"          { return TokenPackage.getPRAGMA(); }
 //(0(o|O){octit}*) |
 //(0(x|X){hexit}*) |
 //({digit}+)            { return TokenPackage.getNUMBER(); }
 
-//{character}           { return TokenPackage.getCHARACTER(); }
-//{string}              { return TokenPackage.getSTRING();}
+{character}           { return GeneratedTypes.CHAR; }
+{string}              { return GeneratedTypes.STRING;}
 
 //"\\end{code}"         { yybegin(TEX); return TokenPackage.getBLOCK_COMMENT(); }
 
