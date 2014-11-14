@@ -127,8 +127,8 @@ EOL_COMMENT = "--"[^\n]*
 
 //"["                   { return TokenPackage.getLEFT_BRACKET(); }
 //"]"                   { return TokenPackage.getRIGHT_BRACKET(); }
-//"("                   { return TokenPackage.getLEFT_PAREN(); }
-//")"                   { return TokenPackage.getRIGHT_PAREN(); }
+"("                   { return GeneratedTypes.OPAREN; }
+")"                   { return GeneratedTypes.CPAREN; }
 //":"                   { return TokenPackage.getCOLON();}
 //"::"                  { return TokenPackage.getDOUBLE_COLON(); }
 //";"                   { return TokenPackage.getSEMICOLON();}

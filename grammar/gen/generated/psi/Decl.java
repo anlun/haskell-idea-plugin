@@ -5,15 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Body extends PsiElement {
+public interface Decl extends PsiElement {
 
   @NotNull
-  List<Decl> getDeclList();
+  Lhs getLhs();
 
   @NotNull
-  PsiElement getVccurly();
+  Rhs getRhs();
 
   @NotNull
-  PsiElement getVocurly();
+  PsiElement getEqual();
 
 }

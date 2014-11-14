@@ -7,14 +7,26 @@ import com.intellij.psi.PsiElement;
 
 public interface Module extends PsiElement {
 
-  @NotNull
+  @Nullable
   Body getBody();
+
+  @Nullable
+  Exportlist getExportlist();
 
   @NotNull
   Modid getModid();
 
+  @Nullable
+  Rest getRest();
+
+  @Nullable
+  PsiElement getCparen();
+
   @NotNull
   PsiElement getModuleT();
+
+  @Nullable
+  PsiElement getOparen();
 
   @NotNull
   PsiElement getWhere();

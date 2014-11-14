@@ -33,7 +33,7 @@
 
     forall = 'forall'    // GHC extension keywords
     foreign = 'foreign'
-    export = 'export'
+    export_t = 'export'
     label = 'label'
     dynamic ='dynamic'
     safe = 'safe'
@@ -114,8 +114,10 @@
  ']'            { L _ ITcbrack }
  '[:'           { L _ ITopabrack }
  ':]'           { L _ ITcpabrack }
- '('            { L _ IToparen }
- ')'            { L _ ITcparen }
+ */
+ oparen = '('
+ cparen = ')'
+/*
  '(#'           { L _ IToubxparen }
  '#)'           { L _ ITcubxparen }
  '(|'           { L _ IToparenbar }
@@ -184,10 +186,68 @@ modid   ::=
           CONID
         | QCONID
 
-module ::= 'module' modid 'where' body
+module ::= 'module' modid maybeexports 'where' body? rest?
 
-body ::= rest
+body ::= vocurly decl* vccurly
+
+decl ::= lhs '=' rhs
+
+lhs ::= VARID
+
+rhs ::= (VARID | STRING)+
 
 rest ::= any*
 
 any ::= !<<eof>>
+
+
+//-----------------------------------------------------------------------------
+//-- The Export List
+
+private maybeexports ::= ('(' exportlist ')')?
+
+exportlist ::=
+        expdoclist ',' expdoclist
+        | exportlist1
+
+exportlist1 ::=
+          expdoclist export expdoclist ',' exportlist1
+        | expdoclist export expdoclist
+        | expdoclist
+
+expdoclist ::= (exp_doc expdoclist)?
+
+exp_doc ::=
+          docsection
+        | docnamed
+        | docnext
+
+
+   // No longer allow things like [] and (,,,) to be exported
+   // They are built in syntax, always available
+export  ::=
+          qcname_ext export_subspec?
+        |  'module' modid
+        |  'pattern' qcon
+
+export_subspec ::=
+          '(' '..' ')'
+        | '(' ')'
+        | '(' qcnames ')'
+
+qcnames ::=
+        qcname_ext ',' qcnames
+        |  qcname_ext
+
+qcname_ext ::=
+           qcname
+        |  'type' qcname
+
+// Cannot pull into qcname_ext, as qcname is also used in expression.
+qcname  ::= // Variable or data constructor
+           qvar
+        |  qcon
+
+
+qvar ::= (modid '.')? VARID
+qcon ::= (modid '.')? CONID

@@ -23,9 +23,15 @@ public class ModuleImpl extends ASTWrapperPsiElement implements Module {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public Body getBody() {
-    return findNotNullChildByClass(Body.class);
+    return findChildByClass(Body.class);
+  }
+
+  @Override
+  @Nullable
+  public Exportlist getExportlist() {
+    return findChildByClass(Exportlist.class);
   }
 
   @Override
@@ -35,9 +41,27 @@ public class ModuleImpl extends ASTWrapperPsiElement implements Module {
   }
 
   @Override
+  @Nullable
+  public Rest getRest() {
+    return findChildByClass(Rest.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getCparen() {
+    return findChildByType(CPAREN);
+  }
+
+  @Override
   @NotNull
   public PsiElement getModuleT() {
     return findNotNullChildByType(MODULE_T);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getOparen() {
+    return findChildByType(OPAREN);
   }
 
   @Override

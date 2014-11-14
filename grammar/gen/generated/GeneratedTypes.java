@@ -12,10 +12,24 @@ public interface GeneratedTypes {
 
   IElementType ANY = new HaskellToken("ANY");
   IElementType BODY = new HaskellToken("BODY");
+  IElementType DECL = new HaskellToken("DECL");
+  IElementType EXPDOCLIST = new HaskellToken("EXPDOCLIST");
+  IElementType EXPORT = new HaskellToken("EXPORT");
+  IElementType EXPORTLIST = new HaskellToken("EXPORTLIST");
+  IElementType EXPORTLIST_1 = new HaskellToken("EXPORTLIST_1");
+  IElementType EXPORT_SUBSPEC = new HaskellToken("EXPORT_SUBSPEC");
+  IElementType EXP_DOC = new HaskellToken("EXP_DOC");
+  IElementType LHS = new HaskellToken("LHS");
   IElementType MODID = new HaskellToken("MODID");
   IElementType MODULE = new HaskellToken("MODULE");
+  IElementType QCNAME = new HaskellToken("QCNAME");
+  IElementType QCNAMES = new HaskellToken("QCNAMES");
+  IElementType QCNAME_EXT = new HaskellToken("QCNAME_EXT");
+  IElementType QCON = new HaskellToken("QCON");
   IElementType QCONID = new HaskellToken("QCONID");
+  IElementType QVAR = new HaskellToken("QVAR");
   IElementType REST = new HaskellToken("REST");
+  IElementType RHS = new HaskellToken("RHS");
 
   IElementType AS = new HaskellElementType("as");
   IElementType BLOCK_COMMENT = new HaskellElementType("BLOCK_COMMENT");
@@ -28,17 +42,21 @@ public interface GeneratedTypes {
   IElementType CLASS = new HaskellElementType("class");
   IElementType COLON = new HaskellElementType(":");
   IElementType CONID = new HaskellElementType("CONID");
+  IElementType CPAREN = new HaskellElementType(")");
   IElementType DATA = new HaskellElementType("data");
   IElementType DCOLON = new HaskellElementType("::");
   IElementType DEFAULT = new HaskellElementType("default");
   IElementType DERIVING = new HaskellElementType("deriving");
   IElementType DO = new HaskellElementType("do");
+  IElementType DOCNAMED = new HaskellElementType("docnamed");
+  IElementType DOCNEXT = new HaskellElementType("docnext");
+  IElementType DOCSECTION = new HaskellElementType("docsection");
   IElementType DOT = new HaskellElementType(".");
   IElementType DOTDOT = new HaskellElementType("..");
   IElementType DYNAMIC = new HaskellElementType("dynamic");
   IElementType ELSE = new HaskellElementType("else");
   IElementType EQUAL = new HaskellElementType("=");
-  IElementType EXPORT = new HaskellElementType("export");
+  IElementType EXPORT_T = new HaskellElementType("export");
   IElementType FAMILY = new HaskellElementType("family");
   IElementType FORALL = new HaskellElementType("forall");
   IElementType FOREIGN = new HaskellElementType("foreign");
@@ -62,6 +80,7 @@ public interface GeneratedTypes {
   IElementType NEW_LINE = new HaskellElementType("\\n");
   IElementType OCURLY = new HaskellElementType("{");
   IElementType OF = new HaskellElementType("of");
+  IElementType OPAREN = new HaskellElementType("(");
   IElementType PATTERN = new HaskellElementType("pattern");
   IElementType PRIM = new HaskellElementType("prim");
   IElementType PROC = new HaskellElementType("proc");
@@ -91,17 +110,59 @@ public interface GeneratedTypes {
       else if (type == BODY) {
         return new BodyImpl(node);
       }
+      else if (type == DECL) {
+        return new DeclImpl(node);
+      }
+      else if (type == EXPDOCLIST) {
+        return new ExpdoclistImpl(node);
+      }
+      else if (type == EXPORT) {
+        return new ExportImpl(node);
+      }
+      else if (type == EXPORTLIST) {
+        return new ExportlistImpl(node);
+      }
+      else if (type == EXPORTLIST_1) {
+        return new Exportlist1Impl(node);
+      }
+      else if (type == EXPORT_SUBSPEC) {
+        return new ExportSubspecImpl(node);
+      }
+      else if (type == EXP_DOC) {
+        return new ExpDocImpl(node);
+      }
+      else if (type == LHS) {
+        return new LhsImpl(node);
+      }
       else if (type == MODID) {
         return new ModidImpl(node);
       }
       else if (type == MODULE) {
         return new ModuleImpl(node);
       }
+      else if (type == QCNAME) {
+        return new QcnameImpl(node);
+      }
+      else if (type == QCNAMES) {
+        return new QcnamesImpl(node);
+      }
+      else if (type == QCNAME_EXT) {
+        return new QcnameExtImpl(node);
+      }
+      else if (type == QCON) {
+        return new QconImpl(node);
+      }
       else if (type == QCONID) {
         return new QconidImpl(node);
       }
+      else if (type == QVAR) {
+        return new QvarImpl(node);
+      }
       else if (type == REST) {
         return new RestImpl(node);
+      }
+      else if (type == RHS) {
+        return new RhsImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

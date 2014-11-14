@@ -11,33 +11,15 @@ import static generated.GeneratedTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import generated.psi.*;
 
-public class BodyImpl extends ASTWrapperPsiElement implements Body {
+public class LhsImpl extends ASTWrapperPsiElement implements Lhs {
 
-  public BodyImpl(ASTNode node) {
+  public LhsImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof Visitor) ((Visitor)visitor).visitBody(this);
+    if (visitor instanceof Visitor) ((Visitor)visitor).visitLhs(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<Decl> getDeclList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Decl.class);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getVccurly() {
-    return findNotNullChildByType(VCCURLY);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getVocurly() {
-    return findNotNullChildByType(VOCURLY);
   }
 
 }

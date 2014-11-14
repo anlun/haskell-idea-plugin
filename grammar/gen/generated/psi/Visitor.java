@@ -19,6 +19,38 @@ public class Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDecl(@NotNull Decl o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExpDoc(@NotNull ExpDoc o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExpdoclist(@NotNull Expdoclist o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExport(@NotNull Export o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExportSubspec(@NotNull ExportSubspec o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExportlist(@NotNull Exportlist o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExportlist1(@NotNull Exportlist1 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLhs(@NotNull Lhs o) {
+    visitPsiElement(o);
+  }
+
   public void visitModid(@NotNull Modid o) {
     visitPsiElement(o);
   }
@@ -27,7 +59,31 @@ public class Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitQcname(@NotNull Qcname o) {
+    visitPsiElement(o);
+  }
+
+  public void visitQcnameExt(@NotNull QcnameExt o) {
+    visitPsiElement(o);
+  }
+
+  public void visitQcnames(@NotNull Qcnames o) {
+    visitPsiElement(o);
+  }
+
+  public void visitQcon(@NotNull Qcon o) {
+    visitPsiElement(o);
+  }
+
+  public void visitQvar(@NotNull Qvar o) {
+    visitPsiElement(o);
+  }
+
   public void visitRest(@NotNull Rest o) {
+    visitPsiElement(o);
+  }
+
+  public void visitRhs(@NotNull Rhs o) {
     visitPsiElement(o);
   }
 
