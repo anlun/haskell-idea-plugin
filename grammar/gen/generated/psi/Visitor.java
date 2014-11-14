@@ -47,7 +47,39 @@ public class Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitImportdecl(@NotNull Importdecl o) {
+    visitPsiElement(o);
+  }
+
+  public void visitImportdecls(@NotNull Importdecls o) {
+    visitPsiElement(o);
+  }
+
+  public void visitImpspec(@NotNull Impspec o) {
+    visitPsiElement(o);
+  }
+
   public void visitLhs(@NotNull Lhs o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMaybePkg(@NotNull MaybePkg o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMaybeSafe(@NotNull MaybeSafe o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMaybeSrc(@NotNull MaybeSrc o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMaybeas(@NotNull Maybeas o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMaybeimpspec(@NotNull Maybeimpspec o) {
     visitPsiElement(o);
   }
 
@@ -56,6 +88,10 @@ public class Visitor extends PsiElementVisitor {
   }
 
   public void visitModule(@NotNull Module o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOptqualified(@NotNull Optqualified o) {
     visitPsiElement(o);
   }
 

@@ -19,9 +19,18 @@ public interface GeneratedTypes {
   IElementType EXPORTLIST_1 = new HaskellToken("EXPORTLIST_1");
   IElementType EXPORT_SUBSPEC = new HaskellToken("EXPORT_SUBSPEC");
   IElementType EXP_DOC = new HaskellToken("EXP_DOC");
+  IElementType IMPORTDECL = new HaskellToken("IMPORTDECL");
+  IElementType IMPORTDECLS = new HaskellToken("IMPORTDECLS");
+  IElementType IMPSPEC = new HaskellToken("IMPSPEC");
   IElementType LHS = new HaskellToken("LHS");
+  IElementType MAYBEAS = new HaskellToken("MAYBEAS");
+  IElementType MAYBEIMPSPEC = new HaskellToken("MAYBEIMPSPEC");
+  IElementType MAYBE_PKG = new HaskellToken("MAYBE_PKG");
+  IElementType MAYBE_SAFE = new HaskellToken("MAYBE_SAFE");
+  IElementType MAYBE_SRC = new HaskellToken("MAYBE_SRC");
   IElementType MODID = new HaskellToken("MODID");
   IElementType MODULE = new HaskellToken("MODULE");
+  IElementType OPTQUALIFIED = new HaskellToken("OPTQUALIFIED");
   IElementType QCNAME = new HaskellToken("QCNAME");
   IElementType QCNAMES = new HaskellToken("QCNAMES");
   IElementType QCNAME_EXT = new HaskellToken("QCNAME_EXT");
@@ -64,6 +73,7 @@ public interface GeneratedTypes {
   IElementType HIDING = new HaskellElementType("hiding");
   IElementType IF = new HaskellElementType("if");
   IElementType IMPORT = new HaskellElementType("import");
+  IElementType IMPORTDECLS_3_0 = new HaskellElementType("importdecls_3_0");
   IElementType IN = new HaskellElementType("in");
   IElementType INFIX = new HaskellElementType("infix");
   IElementType INFIXL = new HaskellElementType("infixl");
@@ -74,6 +84,11 @@ public interface GeneratedTypes {
   IElementType LABEL = new HaskellElementType("label");
   IElementType LAM = new HaskellElementType("\\\\");
   IElementType LET = new HaskellElementType("let");
+  IElementType MAYBEAS_1_0 = new HaskellElementType("maybeas_1_0");
+  IElementType MAYBEIMPSPEC_1_0 = new HaskellElementType("maybeimpspec_1_0");
+  IElementType MAYBE_PKG_1_0 = new HaskellElementType("maybe_pkg_1_0");
+  IElementType MAYBE_SAFE_1_0 = new HaskellElementType("maybe_safe_1_0");
+  IElementType MAYBE_SRC_1_0 = new HaskellElementType("maybe_src_1_0");
   IElementType MDO = new HaskellElementType("mdo");
   IElementType MODULE_T = new HaskellElementType("module");
   IElementType NEWTYPE = new HaskellElementType("newtype");
@@ -81,6 +96,7 @@ public interface GeneratedTypes {
   IElementType OCURLY = new HaskellElementType("{");
   IElementType OF = new HaskellElementType("of");
   IElementType OPAREN = new HaskellElementType("(");
+  IElementType OPTQUALIFIED_1_0 = new HaskellElementType("optqualified_1_0");
   IElementType PATTERN = new HaskellElementType("pattern");
   IElementType PRIM = new HaskellElementType("prim");
   IElementType PROC = new HaskellElementType("proc");
@@ -131,14 +147,41 @@ public interface GeneratedTypes {
       else if (type == EXP_DOC) {
         return new ExpDocImpl(node);
       }
+      else if (type == IMPORTDECL) {
+        return new ImportdeclImpl(node);
+      }
+      else if (type == IMPORTDECLS) {
+        return new ImportdeclsImpl(node);
+      }
+      else if (type == IMPSPEC) {
+        return new ImpspecImpl(node);
+      }
       else if (type == LHS) {
         return new LhsImpl(node);
+      }
+      else if (type == MAYBEAS) {
+        return new MaybeasImpl(node);
+      }
+      else if (type == MAYBEIMPSPEC) {
+        return new MaybeimpspecImpl(node);
+      }
+      else if (type == MAYBE_PKG) {
+        return new MaybePkgImpl(node);
+      }
+      else if (type == MAYBE_SAFE) {
+        return new MaybeSafeImpl(node);
+      }
+      else if (type == MAYBE_SRC) {
+        return new MaybeSrcImpl(node);
       }
       else if (type == MODID) {
         return new ModidImpl(node);
       }
       else if (type == MODULE) {
         return new ModuleImpl(node);
+      }
+      else if (type == OPTQUALIFIED) {
+        return new OptqualifiedImpl(node);
       }
       else if (type == QCNAME) {
         return new QcnameImpl(node);

@@ -50,14 +50,41 @@ public class GeneratedParser implements PsiParser {
     else if (root_ == EXPORTLIST_1) {
       result_ = exportlist1(builder_, 0);
     }
+    else if (root_ == IMPORTDECL) {
+      result_ = importdecl(builder_, 0);
+    }
+    else if (root_ == IMPORTDECLS) {
+      result_ = importdecls(builder_, 0);
+    }
+    else if (root_ == IMPSPEC) {
+      result_ = impspec(builder_, 0);
+    }
     else if (root_ == LHS) {
       result_ = lhs(builder_, 0);
+    }
+    else if (root_ == MAYBE_PKG) {
+      result_ = maybe_pkg(builder_, 0);
+    }
+    else if (root_ == MAYBE_SAFE) {
+      result_ = maybe_safe(builder_, 0);
+    }
+    else if (root_ == MAYBE_SRC) {
+      result_ = maybe_src(builder_, 0);
+    }
+    else if (root_ == MAYBEAS) {
+      result_ = maybeas(builder_, 0);
+    }
+    else if (root_ == MAYBEIMPSPEC) {
+      result_ = maybeimpspec(builder_, 0);
     }
     else if (root_ == MODID) {
       result_ = modid(builder_, 0);
     }
     else if (root_ == MODULE) {
       result_ = module(builder_, 0);
+    }
+    else if (root_ == OPTQUALIFIED) {
+      result_ = optqualified(builder_, 0);
     }
     else if (root_ == QCNAME) {
       result_ = qcname(builder_, 0);
@@ -387,6 +414,104 @@ public class GeneratedParser implements PsiParser {
   }
 
   /* ********************************************************** */
+  // 'import' maybe_src maybe_safe optqualified maybe_pkg modid maybeas maybeimpspec
+  public static boolean importdecl(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "importdecl")) return false;
+    if (!nextTokenIs(builder_, IMPORT)) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, IMPORT);
+    result_ = result_ && maybe_src(builder_, level_ + 1);
+    result_ = result_ && maybe_safe(builder_, level_ + 1);
+    result_ = result_ && optqualified(builder_, level_ + 1);
+    result_ = result_ && maybe_pkg(builder_, level_ + 1);
+    result_ = result_ && modid(builder_, level_ + 1);
+    result_ = result_ && maybeas(builder_, level_ + 1);
+    result_ = result_ && maybeimpspec(builder_, level_ + 1);
+    exit_section_(builder_, marker_, IMPORTDECL, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // importdecls ';' importdecl           
+  //         | importdecls ';'                      
+  //         | importdecl                         
+  //         |                        
+  public static boolean importdecls(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "importdecls")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<importdecls>");
+    result_ = importdecls_0(builder_, level_ + 1);
+    if (!result_) result_ = importdecls_1(builder_, level_ + 1);
+    if (!result_) result_ = importdecl(builder_, level_ + 1);
+    if (!result_) result_ = consumeToken(builder_, IMPORTDECLS_3_0);
+    exit_section_(builder_, level_, marker_, IMPORTDECLS, result_, false, null);
+    return result_;
+  }
+
+  // importdecls ';' importdecl
+  private static boolean importdecls_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "importdecls_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = importdecls(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, ";");
+    result_ = result_ && importdecl(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // importdecls ';'
+  private static boolean importdecls_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "importdecls_1")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = importdecls(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, ";");
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // '(' exportlist ')'               
+  //         |  'hiding' '(' exportlist ')'
+  public static boolean impspec(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "impspec")) return false;
+    if (!nextTokenIs(builder_, "<impspec>", OPAREN, HIDING)) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<impspec>");
+    result_ = impspec_0(builder_, level_ + 1);
+    if (!result_) result_ = impspec_1(builder_, level_ + 1);
+    exit_section_(builder_, level_, marker_, IMPSPEC, result_, false, null);
+    return result_;
+  }
+
+  // '(' exportlist ')'
+  private static boolean impspec_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "impspec_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, OPAREN);
+    result_ = result_ && exportlist(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, CPAREN);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // 'hiding' '(' exportlist ')'
+  private static boolean impspec_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "impspec_1")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, HIDING);
+    result_ = result_ && consumeToken(builder_, OPAREN);
+    result_ = result_ && exportlist(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, CPAREN);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
   // VARID
   public static boolean lhs(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "lhs")) return false;
@@ -395,6 +520,80 @@ public class GeneratedParser implements PsiParser {
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, VARID);
     exit_section_(builder_, marker_, LHS, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // STRING                             
+  //         |                  
+  public static boolean maybe_pkg(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "maybe_pkg")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<maybe pkg>");
+    result_ = consumeToken(builder_, STRING);
+    if (!result_) result_ = consumeToken(builder_, MAYBE_PKG_1_0);
+    exit_section_(builder_, level_, marker_, MAYBE_PKG, result_, false, null);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // 'safe'                             
+  //         |                        
+  public static boolean maybe_safe(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "maybe_safe")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<maybe safe>");
+    result_ = consumeToken(builder_, SAFE);
+    if (!result_) result_ = consumeToken(builder_, MAYBE_SAFE_1_0);
+    exit_section_(builder_, level_, marker_, MAYBE_SAFE, result_, false, null);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // '{-# SOURCE' '#-}'         
+  //         |                     
+  public static boolean maybe_src(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "maybe_src")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<maybe src>");
+    result_ = maybe_src_0(builder_, level_ + 1);
+    if (!result_) result_ = consumeToken(builder_, MAYBE_SRC_1_0);
+    exit_section_(builder_, level_, marker_, MAYBE_SRC, result_, false, null);
+    return result_;
+  }
+
+  // '{-# SOURCE' '#-}'
+  private static boolean maybe_src_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "maybe_src_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, "{-# SOURCE");
+    result_ = result_ && consumeToken(builder_, "#-}");
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // 'as' modid                        
+  //         |                 
+  public static boolean maybeas(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "maybeas")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<maybeas>");
+    result_ = maybeas_0(builder_, level_ + 1);
+    if (!result_) result_ = consumeToken(builder_, MAYBEAS_1_0);
+    exit_section_(builder_, level_, marker_, MAYBEAS, result_, false, null);
+    return result_;
+  }
+
+  // 'as' modid
+  private static boolean maybeas_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "maybeas_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, AS);
+    result_ = result_ && modid(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
@@ -415,6 +614,19 @@ public class GeneratedParser implements PsiParser {
     result_ = result_ && exportlist(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, CPAREN);
     exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // impspec                           
+  //         |                       
+  public static boolean maybeimpspec(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "maybeimpspec")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<maybeimpspec>");
+    result_ = impspec(builder_, level_ + 1);
+    if (!result_) result_ = consumeToken(builder_, MAYBEIMPSPEC_1_0);
+    exit_section_(builder_, level_, marker_, MAYBEIMPSPEC, result_, false, null);
     return result_;
   }
 
@@ -461,6 +673,19 @@ public class GeneratedParser implements PsiParser {
     if (!recursion_guard_(builder_, level_, "module_5")) return false;
     rest(builder_, level_ + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // 'qualified'                          
+  //         |                 
+  public static boolean optqualified(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "optqualified")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<optqualified>");
+    result_ = consumeToken(builder_, QUALIFIED);
+    if (!result_) result_ = consumeToken(builder_, OPTQUALIFIED_1_0);
+    exit_section_(builder_, level_, marker_, OPTQUALIFIED, result_, false, null);
+    return result_;
   }
 
   /* ********************************************************** */

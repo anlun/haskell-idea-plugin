@@ -249,5 +249,51 @@ qcname  ::= // Variable or data constructor
         |  qcon
 
 
+//-----------------------------------------------------------------------------
+//-- Import Declarations
+
+//-- import decls can be *empty*, or even just a string of semicolons
+//-- whereas topdecls must contain at least one topdecl.
+
+importdecls ::=
+          importdecls ';' importdecl
+        | importdecls ';'
+        | importdecl
+        |
+
+importdecl ::=
+        'import' maybe_src maybe_safe optqualified maybe_pkg modid maybeas maybeimpspec
+
+
+maybe_src ::=
+          '{-# SOURCE' '#-}'
+        |
+
+maybe_safe ::=
+          'safe'
+        |
+
+maybe_pkg ::=
+          STRING
+        |
+
+optqualified ::=
+          'qualified'
+        |
+
+maybeas ::=
+          'as' modid
+        |
+
+maybeimpspec ::=
+          impspec
+        |
+
+impspec ::=
+           '(' exportlist ')'
+        |  'hiding' '(' exportlist ')'
+
+
+
 qvar ::= (modid '.')? VARID
 qcon ::= (modid '.')? CONID
