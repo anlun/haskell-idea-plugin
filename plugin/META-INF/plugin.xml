@@ -151,6 +151,11 @@
         <applicationConfigurable groupId="build" instance="org.jetbrains.haskell.debugger.config.DebuggerConfigurable"/>
         <applicationService serviceImplementation="org.jetbrains.haskell.debugger.config.HaskellDebugSettings"/>
         <executor implementation="org.jetbrains.haskell.debugger.DebugConsoleExecutor"/>
+
+        <!--Yesod-->
+        <lang.parserDefinition language="Hamlet"
+                               implementationClass="org.jetbrains.yesod.hamlet.parser.HamletParserDefinition"/>
+
     </extensions>
 
     <extensionPoints>
