@@ -15,5 +15,5 @@ public interface HaskellIcons {
     public Icon CABAL = IconLoader.findIcon("/org/jetbrains/haskell/icons/cabal.png");
     public Icon BIG = IconLoader.findIcon("/org/jetbrains/haskell/icons/haskell.png");
     public Icon UPDATE = IconLoader.findIcon("/org/jetbrains/haskell/icons/update.png");
-    public Icon HAMLET = IconLoader.findIcon("/org/jetbrains/haskell/icons/hamlet16.png");
+    public Icon HAMLET = IconLoader.findIcon("/org/jetbrains/haskell/icons/yesod16.png");
 }
