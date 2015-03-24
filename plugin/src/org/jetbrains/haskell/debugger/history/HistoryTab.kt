@@ -29,7 +29,7 @@ public class HistoryTab(private val debugSession : XDebugSessionImpl,
     private val myUi: RunnerLayoutUi = RunnerLayoutUi.Factory.getInstance(process.getSession()!!.getProject())!!
             .create("History", "Debugger History", process.getSession()!!.getSessionName(), this)
 
-    private val framesPanel = FramesPanel()
+    private val framesPanel = FramesPanel(manager)
 
     init {
         val framesContext = myUi.createContent("HistoryFramesContent", JBScrollPane(framesPanel), "History frames", AllIcons.Debugger.Frame, null)
@@ -87,45 +87,6 @@ public class HistoryTab(private val debugSession : XDebugSessionImpl,
             framesPanel.setSelectedIndex(index - 1)
         } else {
             manager.indexSelected(index)
-        }
-    }
-
-    private inner class FramesPanel : JBList() {
-        private val listModel = DefaultListModel<String>()
-
-        init {
-            setModel(listModel as ListModel<Any?>)
-            setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
-            setValueIsAdjusting(true)
-            addListSelectionListener { event: ListSelectionEvent ->
-                manager.indexSelected(getSelectedIndex())
-            }
-        }
-
-        override fun getModel(): ListModel<Any?>? {
-            return listModel as ListModel<Any?>
-        }
-
-        public fun addElement(line: String) {
-            listModel.addElement(line)
-            if (listModel.size() == 1) {
-                setSelectedIndex(0)
-            }
-        }
-
-        public fun clear() {
-            listModel.clear()
-        }
-
-        public fun getIndexCount(): Int {
-            return listModel.size()
-        }
-
-        public fun isFrameUnknown(): Boolean {
-            if (getSelectedIndex() < 0) {
-                return true
-            }
-            return listModel.get(getSelectedIndex()).equals("...")
         }
     }
 
