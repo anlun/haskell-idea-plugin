@@ -5,17 +5,13 @@ import com.intellij.openapi.Disposable
 import com.intellij.debugger.impl.DebuggerStateManager
 import com.intellij.execution.ui.RunnerLayoutUi
 import com.intellij.debugger.ui.impl.VariablesPanel
-import javax.swing.JComponent
 import org.jetbrains.haskell.debugger.frames.HsStackFrame
 import com.intellij.ui.components.JBList
 import javax.swing.event.ListSelectionEvent
 import com.intellij.debugger.impl.DebuggerContextImpl
-import javax.swing.DefaultListModel
 import com.intellij.execution.ui.layout.PlaceInGrid
 import com.intellij.icons.AllIcons
-import javax.swing.ListSelectionModel
 import com.intellij.ui.components.JBScrollPane
-import javax.swing.ListModel
 import com.intellij.xdebugger.impl.frame.XVariablesView
 import com.intellij.xdebugger.impl.XDebugSessionImpl
 import com.intellij.xdebugger.impl.frame.XDebugView
@@ -23,6 +19,7 @@ import com.intellij.debugger.ui.DebuggerContentInfo
 import com.intellij.ui.content.Content
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.xdebugger.impl.actions.XDebuggerActions
+import javax.swing.*
 
 public class HistoryTab(private val debugSession : XDebugSessionImpl,
                         private val process: HaskellDebugProcess,
@@ -73,7 +70,7 @@ public class HistoryTab(private val debugSession : XDebugSessionImpl,
         framesPanel.addElement(line)
     }
 
-    public fun getHistoryFramesModel(): DefaultListModel<String> = framesPanel.getModel()
+    public fun getHistoryFramesModel(): DefaultListModel<String> = framesPanel.getModel() as DefaultListModel<String>
 
     public fun shiftBack() {
         val index = framesPanel.getSelectedIndex()
@@ -94,10 +91,10 @@ public class HistoryTab(private val debugSession : XDebugSessionImpl,
     }
 
     private inner class FramesPanel : JBList() {
-        private val listModel = DefaultListModel<String?>()
+        private val listModel = DefaultListModel<String>()
 
         init {
-            setModel(listModel)
+            setModel(listModel as ListModel<Any?>)
             setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
             setValueIsAdjusting(true)
             addListSelectionListener { event: ListSelectionEvent ->
@@ -105,8 +102,8 @@ public class HistoryTab(private val debugSession : XDebugSessionImpl,
             }
         }
 
-        override fun getModel(): DefaultListModel<String?> {
-            return listModel
+        override fun getModel(): ListModel<Any?>? {
+            return listModel as ListModel<Any?>
         }
 
         public fun addElement(line: String) {
